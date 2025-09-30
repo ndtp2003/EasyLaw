@@ -32,6 +32,7 @@ class Settings(BaseSettings):
     milvus_uri: str = Field(env="MILVUS_URI")
     milvus_user: Optional[str] = Field(default=None, env="MILVUS_USER")
     milvus_password: Optional[str] = Field(default=None, env="MILVUS_PASSWORD")
+    milvus_token: Optional[str] = Field(default=None, env="MILVUS_TOKEN")
     milvus_db_name: str = Field(env="MILVUS_DB_NAME")
     
     # AI Configuration
