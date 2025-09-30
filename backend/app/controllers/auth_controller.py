@@ -162,12 +162,40 @@ async def initialize_admin():
         return {
             "message": "Admin user initialized successfully",
             "admin_email": admin_user.email,
-            "note": "Default password is 'admin123' - please change it immediately"
+            "note": "Default password is 'Admin@12345' - please change it immediately"
         }
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to initialize admin: {str(e)}"
+        )
+
+
+@router.get("/init-demo-accounts")
+async def initialize_demo_accounts():
+    """Initialize demo accounts for testing (admin + user)."""
+    try:
+        accounts = await auth_service.init_default_accounts()
+        return {
+            "message": "Demo accounts initialized successfully",
+            "accounts": {
+                "admin": {
+                    "email": accounts["admin"].email,
+                    "password": "Admin@12345",
+                    "role": accounts["admin"].role
+                },
+                "user": {
+                    "email": accounts["user"].email, 
+                    "password": "User@12345",
+                    "role": accounts["user"].role
+                }
+            },
+            "note": "These are demo accounts for testing. Please change passwords in production."
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to initialize demo accounts: {str(e)}"
         )
 
 

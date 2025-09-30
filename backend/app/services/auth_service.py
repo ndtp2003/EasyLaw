@@ -222,6 +222,10 @@ class AuthService:
         """Ensure admin user exists."""
         return await self.user_repo.ensure_admin_exists()
     
+    async def init_default_accounts(self) -> dict:
+        """Initialize default admin and user accounts for testing."""
+        return await self.user_repo.init_default_accounts()
+    
     async def validate_admin_access(self, user_id: str) -> bool:
         """Validate if user has admin access."""
         user = await self.user_repo.get_user_by_id(user_id)

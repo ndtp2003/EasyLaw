@@ -180,15 +180,47 @@ class UserRepository:
     
     async def ensure_admin_exists(self) -> UserInDB:
         """Ensure admin user exists, create if not."""
-        admin_email = settings.admin_email
+        admin_email = "admin@gmail.com"
         admin_user = await self.get_user_by_email(admin_email)
         
         if not admin_user:
             # Create default admin user
             from ..core.security import security
-            default_password = "admin123"  # TODO: Change this in production
+            default_password = "Admin@12345"
             password_hash = security.hash_password(default_password)
             
             admin_user = await self.create_admin_user(admin_email, password_hash)
         
         return admin_user
+    
+    async def ensure_demo_user_exists(self) -> UserInDB:
+        """Ensure demo user exists for testing."""
+        user_email = "user@gmail.com"
+        demo_user = await self.get_user_by_email(user_email)
+        
+        if not demo_user:
+            # Create default demo user
+            from ..core.security import security
+            default_password = "User@12345"
+            password_hash = security.hash_password(default_password)
+            
+            user_data = {
+                "email": user_email,
+                "password_hash": password_hash,
+                "role": UserRole.USER.value,
+                "status": UserStatus.ACTIVE.value
+            }
+            
+            demo_user = await self.create_user(user_data)
+        
+        return demo_user
+    
+    async def init_default_accounts(self):
+        """Initialize both admin and demo user accounts."""
+        admin_user = await self.ensure_admin_exists()
+        demo_user = await self.ensure_demo_user_exists()
+        
+        return {
+            "admin": admin_user,
+            "user": demo_user
+        }

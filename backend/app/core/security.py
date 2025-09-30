@@ -30,6 +30,9 @@ class SecurityUtils:
     
     def verify_password(self, plain_password: str, hashed_password: str) -> bool:
         """Verify a password against its hash."""
+        # Bcrypt has a 72-byte limit, truncate if necessary
+        if len(plain_password.encode('utf-8')) > 72:
+            plain_password = plain_password[:72]
         return self.pwd_context.verify(plain_password, hashed_password)
     
     def create_access_token(
