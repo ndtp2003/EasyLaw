@@ -1,0 +1,11 @@
+# Production Dependencies
+-r base.txt
+
+# Production Server
+gunicorn==21.2.0
+
+# Monitoring & Logging
+sentry-sdk[fastapi]==1.38.0
+
+# Security
+python-security==0.3.0
