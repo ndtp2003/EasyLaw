@@ -25,10 +25,10 @@ class CrawlLawsRequest(BaseModel):
         return v
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "law_types": ["enterprises", "labor"],
-                "force_update": false
+                "force_update": False
             }
         }
 
@@ -42,7 +42,7 @@ class UploadLawsRequest(BaseModel):
     category: Optional[str] = Field(None, description="Law category")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "file_name": "company_internal_policy.pdf",
                 "file_type": "PDF",
@@ -65,7 +65,7 @@ class AdminAgentCommand(BaseModel):
         return v.strip()
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "command": "Generate statistics for this month",
                 "context": {"format": "excel"}
@@ -82,7 +82,7 @@ class AdminAgentResponse(BaseModel):
     success: bool = Field(..., description="Command success status")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "response": "Statistics report generated successfully for January 2024",
                 "action_taken": "generate_report",
@@ -91,7 +91,7 @@ class AdminAgentResponse(BaseModel):
                     "total_users": 150,
                     "total_chats": 1250
                 },
-                "success": true
+                "success": True
             }
         }
 
@@ -111,7 +111,7 @@ class UserManagementRequest(BaseModel):
         return v
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "email": "user@example.com",
                 "action": "deactivate",
@@ -133,7 +133,7 @@ class AdminStatsResponse(BaseModel):
     storage_stats: Dict[str, Any] = Field(..., description="Storage statistics")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "total_users": 150,
                 "active_users": 120,
@@ -167,14 +167,14 @@ class AdminLogResponse(BaseModel):
     created_at: str = Field(..., description="Creation timestamp")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "id": "507f1f77bcf86cd799439013",
                 "admin_email": "admin@example.com",
                 "action": "crawl_laws",
                 "params": {"law_types": ["enterprises"]},
                 "result": {"documents_processed": 150},
-                "success": true,
+                "success": True,
                 "execution_time": 45.2,
                 "created_at": "2024-01-01T12:00:00Z"
             }

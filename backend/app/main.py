@@ -80,8 +80,9 @@ async def health_check():
 
 
 # Import and include routers
-# from app.controllers import auth, chat, admin
-# app.include_router(auth.router, prefix="/api/v1/auth", tags=["authentication"])
+from app.controllers.auth_controller import router as auth_router
+
+app.include_router(auth_router, prefix="/api/v1/auth", tags=["authentication"])
 # app.include_router(chat.router, prefix="/api/v1/chat", tags=["chat"])
 # app.include_router(admin.router, prefix="/api/v1/admin", tags=["admin"])
 

@@ -32,7 +32,7 @@ class UserRegistration(BaseModel):
         return v
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "email": "user@example.com",
                 "password": "StrongPass123",
@@ -49,11 +49,11 @@ class UserLogin(BaseModel):
     remember_me: bool = Field(default=False, description="Extended session duration")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "email": "user@example.com",
                 "password": "StrongPass123",
-                "remember_me": false
+                "remember_me": False
             }
         }
 
@@ -68,7 +68,7 @@ class UserResponse(BaseModel):
     created_at: str = Field(..., description="Creation timestamp")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "id": "507f1f77bcf86cd799439011",
                 "email": "user@example.com",
@@ -88,7 +88,7 @@ class TokenResponse(BaseModel):
     user: UserResponse = Field(..., description="User information")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "access_token": "eyJhbGciOiJIUzI1NiIs...",
                 "token_type": "bearer",
@@ -110,7 +110,7 @@ class PasswordReset(BaseModel):
     email: EmailStr = Field(..., description="User email address")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "email": "user@example.com"
             }
@@ -131,7 +131,7 @@ class PasswordChange(BaseModel):
         return v
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "current_password": "OldPass123",
                 "new_password": "NewStrongPass456",

@@ -39,10 +39,10 @@ class AdminLog(BaseModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "admin_id": "507f1f77bcf86cd799439011",
                 "action": "crawl_laws",

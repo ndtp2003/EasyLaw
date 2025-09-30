@@ -15,7 +15,7 @@ class SessionCreate(BaseModel):
     title: Optional[str] = Field(None, max_length=200, description="Optional session title")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "mode": "laws_public",
                 "title": "Labor law consultation"
@@ -35,7 +35,7 @@ class SessionResponse(BaseModel):
     updated_at: str = Field(..., description="Last update timestamp")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "id": "507f1f77bcf86cd799439011",
                 "mode": "laws_public",
@@ -61,7 +61,7 @@ class MessageCreate(BaseModel):
         return v.strip()
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "content": "What are the requirements for establishing a company in Vietnam?",
                 "session_id": "507f1f77bcf86cd799439011"
@@ -81,7 +81,7 @@ class MessageResponse(BaseModel):
     created_at: str = Field(..., description="Creation timestamp")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "id": "507f1f77bcf86cd799439012",
                 "session_id": "507f1f77bcf86cd799439011",
@@ -105,7 +105,7 @@ class ChatHistoryResponse(BaseModel):
     total_messages: int = Field(..., description="Total message count")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "session": {
                     "id": "507f1f77bcf86cd799439011",
@@ -130,7 +130,7 @@ class SessionsListResponse(BaseModel):
     active_sessions: int = Field(..., description="Active session count")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "sessions": [],
                 "total_sessions": 5,
@@ -148,7 +148,7 @@ class StreamingResponse(BaseModel):
     metadata: Dict[str, Any] = Field(default_factory=dict, description="Additional metadata")
     
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "type": "token",
                 "content": "To establish",
